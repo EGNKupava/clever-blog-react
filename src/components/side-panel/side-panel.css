@@ -1,0 +1,19 @@
+.side-panel {
+  flex: 0 0 240px;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 8px;
+  border: 1px solid grey;
+  border-radius: 8px;
+}
+
+.side-panel-link {
+  padding: 4px 8px;
+  font-size: 16px;
+  color: grey;
+}
+
+.active-link {
+  color: blue;
+  border-bottom: 2px solid #222222;
+}

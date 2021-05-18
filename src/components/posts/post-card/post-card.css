@@ -1,0 +1,11 @@
+.post-card {
+  width: 100%;
+  padding: 16px 32px;
+  border: 1px solid #000000;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.post-card-content {
+  margin-bottom: 16px;
+}

@@ -7,6 +7,7 @@ import ruRu from "antd/lib/locale/ru_RU";
 import configureStore from "./configure-store";
 
 import "./index.css";
+import { BrowserRouter } from "react-router-dom";
 
 const store = configureStore();
 
@@ -14,7 +15,9 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <ConfigProvider locale={ruRu}>
-        <App />
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
       </ConfigProvider>
     </Provider>
   </React.StrictMode>,

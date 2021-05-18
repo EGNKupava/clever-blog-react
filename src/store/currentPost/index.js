@@ -1,20 +1,15 @@
 import { TYPES } from "../action-types";
 
 const initialState = {
-  posts: {
-    posts: [],
-    page: null,
-    postsPerPage: null,
-    totalReults: null,
-  },
+  post: {},
   isLoading: false,
   isError: false,
   error: "",
 };
 
-export const postsReducer = (state = initialState, action) => {
+export const currentPostReducer = (state = initialState, action) => {
   switch (action.type) {
-    case TYPES.GET_POSTS_REQUEST: {
+    case TYPES.GET_POST_REQUEST: {
       return {
         ...state,
         isLoading: true,
@@ -22,16 +17,16 @@ export const postsReducer = (state = initialState, action) => {
       };
     }
 
-    case TYPES.GET_POSTS_REQUEST_SUCCESS: {
-      const { posts } = action;
+    case TYPES.GET_POST_REQUEST_SUCCESS: {
+      const { post } = action;
       return {
         ...state,
-        posts,
+        post,
         isLoading: false,
       };
     }
 
-    case TYPES.GET_POSTS_REQUEST_ERROR: {
+    case TYPES.GET_POST_REQUEST_ERROR: {
       const { error } = action;
       return {
         ...state,
