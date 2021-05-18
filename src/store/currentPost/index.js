@@ -5,6 +5,7 @@ const initialState = {
   isLoading: false,
   isError: false,
   error: "",
+  newPostCardVisible: false,
 };
 
 export const currentPostReducer = (state = initialState, action) => {

@@ -40,6 +40,13 @@ export const postsReducer = (state = initialState, action) => {
       };
     }
 
+    case TYPES.NEW_POST_CARD_TOGGLE: {
+      return {
+        ...state,
+        newPostCardVisible: !state.newPostCardVisible,
+      };
+    }
+
     default:
       return state;
   }

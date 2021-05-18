@@ -2,12 +2,7 @@ import { put, call, takeLatest, select } from "redux-saga/effects";
 import axios from "axios";
 import { api } from "../../constants/api";
 import { TYPES } from "../action-types";
-import {
-  getPostsRequestSuccess,
-  getPostsRequestError,
-  getPostRequestSuccess,
-  getPostRequestError,
-} from "./actions";
+import { getPostsRequestSuccess, getPostsRequestError } from "./actions";
 
 function* getPostsWorker() {
   try {
@@ -20,16 +15,6 @@ function* getPostsWorker() {
   }
 }
 
-function* getPostWorker({ id }) {
-  try {
-    const { data } = yield call(axios.get, `${api.posts}?id=${id}`);
-    yield put(getPostRequestSuccess(data));
-  } catch (error) {
-    yield put(getPostRequestError(error.message));
-  }
-}
-
 export default function* postsWatcher() {
   yield takeLatest(TYPES.GET_POSTS_REQUEST, getPostsWorker);
-  yield takeLatest(TYPES.GET_POST_REQUEST, getPostWorker);
 }

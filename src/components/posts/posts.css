@@ -1,3 +1,14 @@
 .posts {
   flex-grow: 1;
 }
+
+.posts-panel {
+  display: flex;
+  justify-content: flex-end;
+}
+.posts-panel .add-post {
+  border: none;
+  font-size: 16px;
+  font-weight: 700;
+  color: blue;
+}

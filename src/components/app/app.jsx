@@ -5,6 +5,7 @@ import { Posts } from "../posts";
 import { Post } from "../post";
 import { Header } from "../header";
 import { SidePanel } from "../side-panel";
+import { NewPostCard } from "../new-post-card";
 
 import "antd/dist/antd.css";
 
@@ -17,7 +18,7 @@ const App = () => {
       <div className="main">
         <SidePanel />
         <Route exact path="/">
-          <Redirect to="/posts" /> }
+          <Redirect to="/posts" />
         </Route>
         <Route exact path="/posts">
           <Posts />
@@ -25,6 +26,7 @@ const App = () => {
         <Route exact path="/posts/:id">
           <Post />
         </Route>
+        <NewPostCard />
       </div>
     </div>
   );
