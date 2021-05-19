@@ -20,6 +20,7 @@ export const PostCard = ({ post = {} }) => {
       <div className="post-date">{post.date}</div>
       <div className="post-card-content">
         <h2>{post.title}</h2>
+        <p>Описание:</p>
         <h4>{post.description}</h4>
         <p>{post.text}</p>
       </div>
