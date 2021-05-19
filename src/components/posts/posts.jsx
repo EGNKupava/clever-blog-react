@@ -30,7 +30,7 @@ export const Posts = () => {
         </Button>
       </div>
       {posts.map((post) => (
-        <PostCard key={post.key} post={post} />
+        <PostCard key={post.id} post={post} />
       ))}
     </div>
   );

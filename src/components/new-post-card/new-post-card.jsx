@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Drawer, Button, Form, Input } from "antd";
-import { newPostCardToggle } from "../../store/posts/actions";
+import { newPostCardToggle, newPost } from "../../store/posts/actions";
 import { useForm } from "antd/lib/form/Form";
 
 export const NewPostCard = () => {
@@ -15,13 +15,14 @@ export const NewPostCard = () => {
   // }, []);
 
   const onClose = () => {
-    console.log("close");
     dispatch(newPostCardToggle());
+    form.resetFields();
   };
 
   const onSubmit = (values) => {
-    console.log(values);
+    dispatch(newPost(values));
     form.resetFields();
+    dispatch(newPostCardToggle());
   };
   return (
     <Drawer
@@ -35,6 +36,9 @@ export const NewPostCard = () => {
     >
       <Form className="form" form={form} layout="vertical" onFinish={onSubmit}>
         <Form.Item name="title" label="Заголовок">
+          <Input />
+        </Form.Item>
+        <Form.Item name="description" label="Описание">
           <Input />
         </Form.Item>
         <Form.Item name="text" label="Текст">

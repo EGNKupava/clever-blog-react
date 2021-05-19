@@ -9,3 +9,7 @@
 .post-card-content {
   margin-bottom: 16px;
 }
+
+.post-date {
+  text-align: right;
+}

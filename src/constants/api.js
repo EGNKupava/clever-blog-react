@@ -3,4 +3,5 @@ const HOST =
 
 export const api = {
   posts: `${HOST}posts`,
+  newPost: `${HOST}new-post`,
 };
