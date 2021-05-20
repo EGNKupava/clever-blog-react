@@ -6,8 +6,14 @@ import { getPostRequestSuccess, getPostRequestError } from "./actions";
 
 function* getPostWorker({ id }) {
   try {
-    const { data } = yield call(axios.get, `${api.posts}?id=${id}`);
-    yield put(getPostRequestSuccess(data));
+    const {
+      data: { posts },
+    } = yield call(axios.get, `${api.posts}?id=${id}`);
+    if (posts.length) {
+      yield put(getPostRequestSuccess(posts[0]));
+    } else {
+      throw new Error("Ниче не найдено");
+    }
   } catch (error) {
     yield put(getPostRequestError(error.message));
   }

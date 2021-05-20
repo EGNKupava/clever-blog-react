@@ -42,7 +42,7 @@ export const NewPostCard = () => {
           <Input />
         </Form.Item>
         <Form.Item name="text" label="Текст">
-          <Input.TextArea />
+          <Input.TextArea autoSize={{ minRows: 10 }} />
         </Form.Item>
       </Form>
       <Button

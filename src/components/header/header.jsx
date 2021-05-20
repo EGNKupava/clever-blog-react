@@ -1,5 +1,15 @@
 import React from "react";
 
-import "./header.css";
+import logo from "./assets/logo.svg";
 
-export const Header = () => <div className="header">CLEVERLAND BLOG</div>;
+import styles from "./header.module.css";
+
+export const Header = () => (
+  <div className={styles.header}>
+    <div className={styles.logoContainer}>
+      <img src={logo} alt="logo" />
+      <p className={styles.logoTitle}>Cleverland</p>
+    </div>
+    <p className={styles.journal}>Journal</p>
+  </div>
+);
