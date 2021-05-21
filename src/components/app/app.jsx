@@ -1,14 +1,15 @@
 import React from 'react';
 
 import { Header } from '../header';
+import { Main } from '../main';
 
 import './app.css';
 
-export const App = (props) => {
+export const App = () => {
     return (
     <div className="app">
         <Header />
-        Компонент APP
+        <Main />
     </div>
     );
 };
