@@ -6,5 +6,11 @@
 }
 
 .cardImg {
-    width: 200px;
+    max-height: 350px;
+    max-width: 200px;
+}
+
+.title {
+    font-size: 18px;
+    font-weight: 600;
 }
