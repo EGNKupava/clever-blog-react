@@ -1,5 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
+
+import { Image } from "./card-image/image";
+
 import styles from "./card.module.css";
 
 export class Card extends React.Component {
@@ -16,8 +19,12 @@ export class Card extends React.Component {
   };
 
   onButtonClick = () => {
-    this.props.onBuy(this.props.cardData.id, +this.state.counter);
-    this.setState({ counter: 0 });
+    this.props.onBuy(
+      this.props.cardData.id,
+      +this.state.counter,
+      this.state.sumPrice
+    );
+    this.setState({ counter: 0, sumPrice: 0 });
   };
 
   render() {
@@ -28,7 +35,11 @@ export class Card extends React.Component {
       <div className={styles.card}>
         <h2 className={styles.title}>{title}</h2>
         <div>{description}</div>
-        <img src={imgSrc} alt="logo" className={styles.cardImg} />
+        <Image imgSrc={imgSrc} className={styles.cardImg} />
+        <div>Цена: {this.props.cardData.price}$</div>
+        <div>
+          Сумма: {this.state.sumPrice ? `${this.state.sumPrice}$` : null}
+        </div>
         <div>
           <label>
             Количество:
