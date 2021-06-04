@@ -19,7 +19,7 @@ export class Card extends React.Component {
   };
 
   onButtonClick = () => {
-    this.props.onBuy(
+    this.props.store.onBuy(
       this.props.cardData.id,
       +this.state.counter,
       this.state.sumPrice

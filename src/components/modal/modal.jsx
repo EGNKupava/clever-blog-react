@@ -9,7 +9,7 @@ export class Modal extends React.Component {
       <div className={styles.modal}>
         <div className={styles.modalCard}>
           <p>Слишком большая сумма!!!</p>
-          <button type="button" onClick={this.props.onClose}>
+          <button type="button" onClick={() => this.props.store.onClose()}>
             X
           </button>
         </div>

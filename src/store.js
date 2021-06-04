@@ -1,11 +1,3 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
-import { App } from "./components/app";
-
-// import { Store } from "./store";
-import reportWebVitals from "./reportWebVitals";
-
 const DEFAULT_STATE = {
   purchases: {
     tv: 0,
@@ -22,6 +14,9 @@ export class Store {
   }
 
   onBuy(goods, count, price) {
+    console.log("goods: ", goods);
+    console.log("count: ", count);
+    console.log("price: ", price);
     this.state = {
       ...this.state,
       purchases: {
@@ -30,7 +25,7 @@ export class Store {
         sumPrice: this.state.purchases.sumPrice + price,
       },
     };
-    renderAll();
+    console.log("this.state: ", this.state);
   }
 
   onBuyAll() {
@@ -40,8 +35,6 @@ export class Store {
         isModalVisible: true,
       };
     }
-    console.log(this.state);
-    renderAll();
   }
 
   onClose() {
@@ -49,29 +42,9 @@ export class Store {
       ...this.state,
       isModalVisible: false,
     };
-    renderAll();
   }
 
   onClear() {
     this.state = DEFAULT_STATE;
-    renderAll();
   }
 }
-
-const store = new Store();
-
-const renderAll = () => {
-  ReactDOM.render(
-    <React.StrictMode>
-      <App store={store} />
-    </React.StrictMode>,
-    document.getElementById("root")
-  );
-};
-
-renderAll();
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();

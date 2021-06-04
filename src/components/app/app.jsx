@@ -9,7 +9,7 @@ export const App = (props) => {
   return (
     <div className="app">
       <Header />
-      <Main />
+      <Main store={props.store} />
     </div>
   );
 };
