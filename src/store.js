@@ -1,3 +1,5 @@
+let rerenderAll = null;
+
 const DEFAULT_STATE = {
   purchases: {
     tv: 0,
@@ -34,6 +36,7 @@ export class Store {
         ...this.state,
         isModalVisible: true,
       };
+      rerenderAll();
     }
   }
 
@@ -47,4 +50,8 @@ export class Store {
   onClear() {
     this.state = DEFAULT_STATE;
   }
+}
+
+export const subscribe = (observer) => {
+  rerenderAll = observer;
 }
