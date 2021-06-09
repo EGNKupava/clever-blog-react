@@ -1,29 +1,46 @@
 import React from "react";
 
+import './table.css'
+
+const TableComponent = ({data}) => (
+<table className="table">
+  <tbody>
+  { data.map(({ userId, body, title }) => (
+    <tr>
+      <td>{userId}</td>
+      <td>{body}</td>
+      <td>{title}</td>
+    </tr>
+  ))}
+  </tbody>
+</table>
+);
+
+const fetchData = async () => {
+  const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+  const json = await response.json();
+  return json;
+};
+
 export class Table extends React.Component {
   constructor(props) {
     super(props);
-    this.dajsonta = null;
-    this.state = { json: null };
+    this.state = { json: [] };
   }
 
   componentDidMount() {
+    fetchData().then(json => this.setState({json}));
     console.log('DID_MOUNT');
-    fetch('https://jsonplaceholder.typicode.com/posts')
-    .then(response => response.json())
-    .then(json => {
-      this.setState({json})});
+  
   }
 
-  componentWillUnmount() {
+  componentDidUpdate() {
+    console.log('UPDATE');
   }
 
   render() {
-    console.log('this.state.json: ', this.state.json);
     return (
-      <div>
-        ТАБЛИЦА
-      </div>
+        <TableComponent data={this.state.json}/>
     );
   }
 }

@@ -6,15 +6,11 @@ import logo from "./assets/logo.svg";
 
 import styles from "./header.module.css";
 
-export class Header extends React.Component {
-  render() {
-    return (
+export const Header = (props) => (
       <div className={styles.header}>
         <div className={styles.logo}>
           <img src={logo} alt="картинка" />
         </div>
         <Clock />
       </div>
-    );
-  }
-}
+);

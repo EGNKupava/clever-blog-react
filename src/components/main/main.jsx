@@ -7,17 +7,14 @@ import { Table } from '../table';
 
 import styles from "./main.module.css";
 
-export class Main extends React.Component {
-  render() {
-    return (
-      <div className={styles.main}>
-        <Cards store={this.props.store} />
-        <Purchases store={this.props.store} />
-        {this.props.store.state.isModalVisible && (
-          <Modal store={this.props.store} />
-        )}
-        <Table />
-      </div>
-    );
-  }
-}
+export const Main = ({store}) => (
+  <div className={styles.main}>
+    <Cards store={store} />
+    <Purchases store={store} />
+    {store.state.isModalVisible && (
+      <Modal store={store} />
+    )}
+    <Table />
+  </div>
+);
+

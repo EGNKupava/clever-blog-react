@@ -1,4 +1,4 @@
-let rerenderAll = null;
+import { renderAll } from './index';
 
 const DEFAULT_STATE = {
   purchases: {
@@ -27,6 +27,7 @@ export class Store {
         sumPrice: this.state.purchases.sumPrice + price,
       },
     };
+    renderAll();
     console.log("this.state: ", this.state);
   }
 
@@ -36,7 +37,7 @@ export class Store {
         ...this.state,
         isModalVisible: true,
       };
-      rerenderAll();
+      renderAll();
     }
   }
 
@@ -45,13 +46,10 @@ export class Store {
       ...this.state,
       isModalVisible: false,
     };
+    renderAll();
   }
 
   onClear() {
     this.state = DEFAULT_STATE;
   }
-}
-
-export const subscribe = (observer) => {
-  rerenderAll = observer;
 }
