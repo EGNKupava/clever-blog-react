@@ -3,6 +3,7 @@ import React from "react";
 import { Cards } from "../cards";
 import { Purchases } from "../purchases";
 import { Modal } from "../modal";
+import { Table } from '../table';
 
 import styles from "./main.module.css";
 
@@ -15,6 +16,7 @@ export class Main extends React.Component {
         {this.props.store.state.isModalVisible && (
           <Modal store={this.props.store} />
         )}
+        <Table />
       </div>
     );
   }
