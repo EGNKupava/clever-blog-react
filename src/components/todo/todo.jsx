@@ -29,7 +29,7 @@ export const Todo = () => {
       <ol>
       {todoArr.map(({task, key}) => (
         <li key={key}>
-          {task}
+          <span>{task}</span>
           <button onClick={() => {onDelete(key)}}>X</button>
         </li>
       ))}
