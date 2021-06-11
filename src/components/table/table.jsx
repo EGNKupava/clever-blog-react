@@ -1,28 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-import { TableComponent } from './table-component';
 import { fetchData } from '../../utils/fech-data';
 import './table.css'
 
-export class Table extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { json: [] };
-  }
+export const Table = () => {
+  const [json, setJson] = useState([]);
+  const [isTableVisible, setIsTableVisible] = useState(false);
 
-  componentDidMount() {
-    fetchData().then(json => this.setState({json}));
+  useEffect(() => {
     console.log('DID_MOUNT');
-  }
+    fetchData().then(data => {setJson(data)});
+  }, []);
 
-  componentDidUpdate() {
-    console.log('UPDATE');
-  }
-
-  render() {
     return (
-        <TableComponent data={this.state.json}/>
+      <>
+      { isTableVisible ? (
+        <table className="table">
+        <tbody>
+        { json.map(({ userId, body, title, id }) => (
+        <tr key={id} >
+          <td>{userId}</td>
+          <td>{body}</td>
+          <td>{title}</td>
+        </tr>
+      ))}
+      </tbody>
+    </table>) : (
+      <div>
+        <button type="button" onClick={() => setIsTableVisible(true)}>Показать</button>
+        </div>
+      )}
+      </>
     );
-  }
 }
 
