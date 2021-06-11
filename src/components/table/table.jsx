@@ -1,26 +1,8 @@
 import React from "react";
 
+import { TableComponent } from './table-component';
+import { fetchData } from '../../utils/fech-data';
 import './table.css'
-
-const TableComponent = ({data}) => (
-<table className="table">
-  <tbody>
-  { data.map(({ userId, body, title }) => (
-    <tr>
-      <td>{userId}</td>
-      <td>{body}</td>
-      <td>{title}</td>
-    </tr>
-  ))}
-  </tbody>
-</table>
-);
-
-const fetchData = async () => {
-  const response = await fetch('https://jsonplaceholder.typicode.com/posts');
-  const json = await response.json();
-  return json;
-};
 
 export class Table extends React.Component {
   constructor(props) {
@@ -31,7 +13,6 @@ export class Table extends React.Component {
   componentDidMount() {
     fetchData().then(json => this.setState({json}));
     console.log('DID_MOUNT');
-  
   }
 
   componentDidUpdate() {
