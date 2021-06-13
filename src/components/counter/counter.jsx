@@ -16,13 +16,11 @@ export const Counter = (props) => {
   }
 
   useEffect(() => {
-    
     console.log('MOUNT');
-
     return () => {
       console.log('UNMount');
     };
-  },[])
+  },[counter])
 
 
 
