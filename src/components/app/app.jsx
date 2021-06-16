@@ -2,10 +2,10 @@ import React from "react";
 import { Redirect, Route } from "react-router-dom";
 
 import { Posts } from "../posts";
-import { Post } from "../post";
 import { Header } from "../header";
 import { SidePanel } from "../side-panel";
 import { NewPostCard } from "../new-post-card";
+import { ToDo } from "../todo";
 
 import "antd/dist/antd.css";
 
@@ -23,8 +23,8 @@ const App = () => {
         <Route exact path="/posts">
           <Posts />
         </Route>
-        <Route exact path="/posts/:id">
-          <Post />
+        <Route exact path="/todo/:id">
+          <ToDo />
         </Route>
         <NewPostCard />
       </div>

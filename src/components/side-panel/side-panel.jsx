@@ -17,9 +17,9 @@ export const SidePanel = () => {
       <NavLink
         className="side-panel-link"
         activeClassName="active-link"
-        to="/todo"
+        to="/todo/:12"
       >
-        TODO
+        TODO c описанием
       </NavLink>
     </div>
   );
