@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import { App } from "./components/app";
+import { BrowserRouter as Router } from "react-router-dom";
 
 import { Store } from "./store";
 import reportWebVitals from "./reportWebVitals";
@@ -11,7 +12,9 @@ const store = new Store();
 export const renderAll = () => {
   ReactDOM.render(
     <React.StrictMode>
-      <App store={store} />
+      <Router>
+        <App store={store} />
+      </Router>
     </React.StrictMode>,
     document.getElementById("root")
   );
