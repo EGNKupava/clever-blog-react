@@ -7,6 +7,8 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { Store } from "./store";
 import reportWebVitals from "./reportWebVitals";
 
+import "./test-redux-store";
+
 const store = new Store();
 
 export const renderAll = () => {
