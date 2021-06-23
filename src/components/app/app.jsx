@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Redirect, Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 import { Header } from "../header";
 import { Main } from "../main";
@@ -37,7 +37,7 @@ export const App = (props) => {
             <Route path="/main">
               <div>ГЛАВНАЯ</div>
             </Route>
-            <Route path="/catalogue/:id">
+            <Route path="/catalogue">
               <Main store={props.store} />
             </Route>
             <Route path="/todo">
