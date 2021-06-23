@@ -39,17 +39,16 @@ const content = [
 
 export const Accordion = () => {
   const [activeTab, setActiveTab] = useState();
-  console.log("activeTab: ", activeTab);
   return (
     <div className="accordion">
-      {content.map(({ key, title, description }, index) => (
+      {content.map(({ title, key, description }) => (
         <Tab
           title={title}
           setActiveTab={setActiveTab}
           activeTab={activeTab}
-          key={key}
-          index={index}
+          index={key}
           description={description}
+          key={key}
         />
       ))}
     </div>
