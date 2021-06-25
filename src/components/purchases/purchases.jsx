@@ -1,27 +1,37 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { clearPurchases, showLimitModal } from "../../store/actions-creator";
 
 import styles from "./purchases.module.css";
 
-export const Purchases = ({store}) => (
-  <div className={styles.purchases}>
-    Корзина:
-    <p>Холодильник: {store.state.purchases.fridge}</p>
-    <p>TV: {store.state.purchases.tv}</p>
-    <p>Стиралка: {store.state.purchases.washingMashine}</p>
-    <div>Сумма Покупок: {store.state.purchases.sumPrice} $</div>
-    <button
-      type="button"
-      className={styles.buyButton}
-      onClick={() => store.onClear()}
-    >
-      Очистить корзину
-    </button>
-    <button
-      type="button"
-      className={styles.buyButton}
-      onClick={() => store.onBuyAll()}
-    >
-      Купить
-    </button>
-  </div>
-);
+export const Purchases = () => {
+  const dispatch = useDispatch();
+  const purchases = useSelector((state) => state.purchases);
+
+  const onClearClick = () => {
+    const clearPurchasesAction = clearPurchases();
+    dispatch(clearPurchasesAction);
+  };
+
+  const onBuy = () => {
+    if (purchases.sumPrice > 4000) {
+      dispatch(showLimitModal());
+    }
+  };
+
+  return (
+    <div className={styles.purchases}>
+      Корзина:
+      <p>Холодильник: {purchases.fridge}</p>
+      <p>TV: {purchases.tv}</p>
+      <p>Стиралка: {purchases.washingMashine}</p>
+      <div>Сумма Покупок: {purchases.sumPrice} $</div>
+      <button type="button" className={styles.buyButton} onClick={onClearClick}>
+        Очистить корзину
+      </button>
+      <button type="button" className={styles.buyButton} onClick={onBuy}>
+        Купить
+      </button>
+    </div>
+  );
+};

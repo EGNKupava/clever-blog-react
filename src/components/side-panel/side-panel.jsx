@@ -6,7 +6,6 @@ import "./side-panel.css";
 
 export const SidePanel = () => {
   const history = useHistory();
-  console.log("history: ", history);
   let location = useLocation();
   console.log("location: ", location);
 

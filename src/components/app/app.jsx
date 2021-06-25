@@ -37,8 +37,8 @@ export const App = (props) => {
             <Route path="/main">
               <div>ГЛАВНАЯ</div>
             </Route>
-            <Route path="/catalogue/:id">
-              <Main store={props.store} />
+            <Route path="/catalogue">
+              <Main />
             </Route>
             <Route path="/todo">
               <Todo />
