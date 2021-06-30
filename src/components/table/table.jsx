@@ -1,36 +1,40 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import { fetchData } from '../../utils/fech-data';
-import './table.css'
+import "./table.css";
 
 export const Table = () => {
-  const [json, setJson] = useState([]);
-  const [isTableVisible, setIsTableVisible] = useState(false);
+  const [isTableVisible, setIsTableVisible] = useState(true);
+  const dispatch = useDispatch();
+  const {
+    tableData: json,
+    isError,
+    isLoading,
+    errorMessage,
+  } = useSelector((state) => state);
 
   useEffect(() => {
-    console.log('DID_MOUNT');
-    fetchData().then(data => {setJson(data)});
+    dispatch({ type: "GET_TABLE_DATA_REQUEST" });
   }, []);
 
-    return (
-      <>
-      { isTableVisible ? (
+  return (
+    <>
+      {isLoading && <div>LOADING</div>}
+      {isError ? (
+        <h1>{errorMessage}</h1>
+      ) : (
         <table className="table">
-        <tbody>
-        { json.map(({ userId, body, title, id }) => (
-        <tr key={id} >
-          <td>{userId}</td>
-          <td>{body}</td>
-          <td>{title}</td>
-        </tr>
-      ))}
-      </tbody>
-    </table>) : (
-      <div>
-        <button type="button" onClick={() => setIsTableVisible(true)}>Показать</button>
-        </div>
+          <tbody>
+            {json.map(({ userId, body, title, id }) => (
+              <tr key={id}>
+                <td>{userId}</td>
+                <td>{body}</td>
+                <td>{title}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       )}
-      </>
-    );
-}
-
+    </>
+  );
+};

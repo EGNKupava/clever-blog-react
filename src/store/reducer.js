@@ -13,6 +13,10 @@ const INITIAL_STATE = {
     secondName: "Petrobv",
   },
   isModalVisible: false,
+  tableData: [],
+  isLoading: false,
+  isError: false,
+  errorMessage: "",
 };
 
 export const reducer = (state = INITIAL_STATE, action) => {
@@ -58,6 +62,29 @@ export const reducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         isModalVisible: false,
+      };
+    }
+
+    case TYPES.GET_TABLE_DATA_REQUEST: {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+
+    case TYPES.GET_TABLE_DATA_REQUEST_ERROR: {
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        errorMessage: action.message,
+      };
+    }
+    case TYPES.GET_TABLE_DATA_REQUEST_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
+        tableData: action.data,
       };
     }
 
