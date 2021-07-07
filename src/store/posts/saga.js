@@ -11,9 +11,7 @@ import {
 
 function* getPostsWorker() {
   try {
-    console.log("SAGA POSTS");
     const { data } = yield call(axios.get, api.posts);
-    console.log("data: ", data);
     yield put(getPostsRequestSuccess(data));
   } catch (error) {
     yield put(getPostsRequestError(error.message));
@@ -21,10 +19,8 @@ function* getPostsWorker() {
 }
 
 function* newPostWorker({ postData }) {
-  console.log("postData: ", postData);
   try {
     const { data } = yield call(axios.post, api.newPost, postData);
-    console.log("data: ", data);
     yield fork(getPostsWorker);
     // yield put(newPostSuccess(data));
   } catch (error) {

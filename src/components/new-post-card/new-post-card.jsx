@@ -10,9 +10,6 @@ export const NewPostCard = () => {
 
   const { newPostCardVisible } = useSelector(postSelector);
   const [form] = useForm();
-  // useEffect(() => {
-  //   dispatch(getPostRequest(id));
-  // }, []);
 
   const onClose = () => {
     dispatch(newPostCardToggle());

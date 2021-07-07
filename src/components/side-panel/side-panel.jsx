@@ -12,14 +12,16 @@ export const SidePanel = () => {
         activeClassName="active-link"
         to="/posts"
       >
-        Блог
+        Домашки
       </NavLink>
-      <NavLink
-        className="side-panel-link"
-        activeClassName="active-link"
-        to="/todo/:12"
-      >
-        TODO c описанием
+      <NavLink className="side-panel-link" to="/todo">
+        TODO
+      </NavLink>
+      <NavLink className="side-panel-link" to="/messages">
+        Clever Чат
+      </NavLink>
+      <NavLink className="side-panel-link" to="/faq">
+        Интересные статьи
       </NavLink>
     </div>
   );

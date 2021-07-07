@@ -28,7 +28,7 @@ export const PostCard = ({ post = {} }) => {
         <h4>{post.description}</h4>
         <p className="post-text">{post.text}</p>
       </div>
-      <Button onClick={onButtonClick}>Показать все</Button>
+      {/* <Button onClick={onButtonClick}>Показать все</Button> */}
     </div>
   );
 };

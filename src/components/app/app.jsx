@@ -2,6 +2,7 @@ import React from "react";
 import { Redirect, Route } from "react-router-dom";
 
 import { Posts } from "../posts";
+import { Messages } from "../messages";
 import { Header } from "../header";
 import { SidePanel } from "../side-panel";
 import { NewPostCard } from "../new-post-card";
@@ -23,8 +24,14 @@ const App = () => {
         <Route exact path="/posts">
           <Posts />
         </Route>
+        <Route exact path="/messages">
+          <Messages />
+        </Route>
         <Route exact path="/todo/:id">
           <ToDo />
+        </Route>
+        <Route exact path="/faq">
+          <div>FAQ</div>
         </Route>
         <NewPostCard />
       </div>

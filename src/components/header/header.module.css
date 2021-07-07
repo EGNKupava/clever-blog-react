@@ -25,3 +25,13 @@
   font-size: 32px;
   color: rgb(253, 249, 232);
 }
+
+.user {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  max-width: 75px;
+  border-radius: 50%;
+}
