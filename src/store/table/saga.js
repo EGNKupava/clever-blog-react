@@ -1,6 +1,6 @@
 import { call, put, takeLatest, delay } from "redux-saga/effects";
 import axios from "axios";
-import { TYPES } from "./action-types";
+import { TYPES } from "../action-types";
 
 function* getTableData(action) {
   try {
