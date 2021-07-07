@@ -1,14 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Spinner } from "../spinner";
+import { Table as AntTable, Alert, Switch } from "antd";
+
+import { columns } from "./columns";
 
 import "./table.css";
 
 export const Table = () => {
   const dispatch = useDispatch();
 
-  const state = useSelector((state) => state);
-  console.log("state: ", state);
+  const [isTableVisible, setIsTableVisible] = useState(false);
 
   const {
     tableData: json,
@@ -17,31 +18,31 @@ export const Table = () => {
     errorMessage,
   } = useSelector((state) => state.table);
 
-  const onButtonClick = () => {
-    dispatch({ type: "GET_TABLE_DATA_REQUEST" });
+  const onButtonClick = (bool) => {
+    setIsTableVisible(bool);
+    if (bool) {
+      dispatch({ type: "GET_TABLE_DATA_REQUEST" });
+    }
   };
 
   return (
-    <>
-      <button type="button" onClick={onButtonClick}>
-        Сделать запрос
-      </button>
-      {isLoading && <Spinner />}
-      {isError ? (
-        <h1>{errorMessage}</h1>
-      ) : (
-        <table className="table">
-          <tbody>
-            {json.map(({ userId, body, title, id }) => (
-              <tr key={id}>
-                <td>{userId}</td>
-                <td>{body}</td>
-                <td>{title}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+    <div>
+      <Switch
+        onChange={onButtonClick}
+        checkedChildren="Скрыть"
+        unCheckedChildren="Показать"
+      />
+      {isError && (
+        <Alert
+          message="Ошибка"
+          description={errorMessage}
+          type="error"
+          showIcon
+        />
       )}
-    </>
+      {isTableVisible && (
+        <AntTable columns={columns} dataSource={json} loading={isLoading} />
+      )}
+    </div>
   );
 };

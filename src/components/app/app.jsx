@@ -7,9 +7,11 @@ import { SidePanel } from "../side-panel";
 import { Todo } from "../todo";
 import { Table } from "../table";
 import { ThemeContext, themes } from "../theme-context";
-
-import "./app.css";
 import { Accordion } from "../accordion";
+import { Messages } from "../messages";
+
+import "antd/dist/antd.css";
+import "./app.css";
 
 export const App = (props) => {
   const [theme, setTheme] = useState(themes.light);
@@ -48,6 +50,9 @@ export const App = (props) => {
             </Route>
             <Route path="/questions">
               <Accordion />
+            </Route>
+            <Route path="/messages">
+              <Messages />
             </Route>
             <Route path="*">
               <div> 404 PAGE NOT FOUND </div>

@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { Collapse } from "antd";
 
-import { Tab } from "./tab";
+const { Panel } = Collapse;
 
-import "./accordion.css";
+// import "./accordion.css";
+// import { Tab } from "./tab";
 
 const content = [
   {
@@ -37,20 +39,12 @@ const content = [
   },
 ];
 
-export const Accordion = () => {
-  const [activeTab, setActiveTab] = useState();
-  return (
-    <div className="accordion">
-      {content.map(({ title, key, description }) => (
-        <Tab
-          title={title}
-          setActiveTab={setActiveTab}
-          activeTab={activeTab}
-          index={key}
-          description={description}
-          key={key}
-        />
-      ))}
-    </div>
-  );
-};
+export const Accordion = () => (
+  <Collapse defaultActiveKey={["1"]}>
+    {content.map(({ title, key, description }) => (
+      <Panel header={title} key={key}>
+        <p>{description}</p>
+      </Panel>
+    ))}
+  </Collapse>
+);
