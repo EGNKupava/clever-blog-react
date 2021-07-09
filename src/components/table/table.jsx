@@ -41,7 +41,11 @@ export const Table = () => {
         />
       )}
       {isTableVisible && (
-        <AntTable columns={columns} dataSource={json} loading={isLoading} />
+        <AntTable
+          columns={columns}
+          dataSource={json}
+          loading={{ tip: "Загрузка данных", spinning: isLoading }}
+        />
       )}
     </div>
   );
