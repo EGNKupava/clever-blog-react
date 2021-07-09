@@ -3,7 +3,6 @@ import axios from "axios";
 import { TYPES } from "../action-types";
 
 function* getMessagesWorker() {
-  console.log("SAGA MESSAGES");
   try {
     const {
       data: { messages, totalResults },
@@ -26,7 +25,6 @@ function* getMessagesWorker() {
 }
 
 function* sendMessageWorker({ message }) {
-  console.log("message: ", message);
   const body = {
     text: message,
     user: "Cleverland",

@@ -34,14 +34,16 @@ export const Messages = () => {
       <Spin spinning={isLoading} tip="Ждите...">
         {messages.map((message, index) => (
           <div className="message" key={index.toString()}>
-            <div className="date">{getDate(message.date)}</div>
-            <div className="user">user: {message.user}</div>
-            <div className="text">{message.text && message.text}</div>
+            <div className="head">
+              <div className="user">{message.user}</div>
+              <div className="date">{getDate(message.date)}</div>
+            </div>
+            <div className="text">{message.text}</div>
             <div className="likes">Likes: {message.likes}</div>
           </div>
         ))}
       </Spin>
-      <Form onFinish={onFinish} form={form}>
+      <Form onFinish={onFinish} form={form} layout="vertical">
         <Form.Item name="message" label="Введите сообщение">
           <Input.TextArea />
         </Form.Item>
