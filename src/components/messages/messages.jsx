@@ -9,6 +9,7 @@ import {
   StopOutlined,
 } from "@ant-design/icons";
 import classNames from "classnames";
+import { isToday, format } from "date-fns";
 
 import { NewMessage } from "./newMessage";
 
@@ -35,7 +36,12 @@ export const Messages = () => {
     dispatch(getMessagesRequest());
   }, []);
 
-  const getDate = (date) => new Date(Date.parse(date)).toLocaleString();
+  const getDate = (date) => {
+    const dateObj = new Date(Date.parse(date));
+    return isToday(dateObj)
+      ? format(dateObj, "HH:mm")
+      : format(dateObj, "d.LL");
+  };
 
   const onDelete = (id) => {
     dispatch(deleteMessageRequest(id));
