@@ -1,4 +1,4 @@
-import { TYPES } from "./action-types";
+import { TYPES } from "../action-types";
 
 const INITIAL_STATE = {
   purchases: {
@@ -6,11 +6,6 @@ const INITIAL_STATE = {
     fridge: 0,
     washingMashine: 0,
     sumPrice: 0,
-  },
-  user: {
-    name: "Evgen",
-    age: 30,
-    secondName: "Petrobv",
   },
   isModalVisible: false,
 };

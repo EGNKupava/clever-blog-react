@@ -1,12 +1,25 @@
 import { Spin } from "antd";
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Form, Input, Button } from "antd";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector, useStore } from "react-redux";
+import { Form, Input, Button, Popconfirm } from "antd";
+import {
+  DeleteOutlined,
+  EditOutlined,
+  HeartOutlined,
+  CheckCircleOutlined,
+  StopOutlined,
+} from "@ant-design/icons";
+import classNames from "classnames";
+
+import { NewMessage } from "./newMessage";
 
 import {
   getMessagesRequest,
-  sendMessage,
+  deleteMessageRequest,
+  editMessageRequest,
+  upadateMessageLikesRequest,
 } from "../../store/messages/action-creators";
+
 import "./messages.css";
 
 export const Messages = () => {
@@ -14,8 +27,10 @@ export const Messages = () => {
   const { messages, totalResults, isLoading, isError } = useSelector(
     (state) => state.messages
   );
+  const { userName } = useSelector((state) => state.user);
 
-  const [form] = Form.useForm();
+  const [editedMessage, setEditedMessage] = useState(null);
+  const [editedMessageText, setEditedMessageText] = useState("");
 
   useEffect(() => {
     dispatch(getMessagesRequest());
@@ -23,41 +38,100 @@ export const Messages = () => {
 
   const getDate = (date) => new Date(Date.parse(date)).toLocaleString();
 
-  const onFinish = ({ message }) => {
-    dispatch(sendMessage(message));
-    form.resetFields();
+  const onDelete = (id) => {
+    dispatch(deleteMessageRequest(id));
   };
+
+  const onEdit = (id, text) => {
+    setEditedMessage(id);
+    setEditedMessageText(text);
+  };
+
+  const onLike = (id, likes) => {
+    dispatch(upadateMessageLikesRequest(id, `${+likes + 1}`));
+  };
+
+  const onEditSave = () => {
+    dispatch(editMessageRequest(editedMessage, editedMessageText));
+    setEditedMessage(null);
+    setEditedMessageText("");
+  };
+
+  const onEditCancel = () => {
+    setEditedMessage(null);
+    setEditedMessageText("");
+  };
+
+  const messageClass = (user) =>
+    classNames("message", { my: user === userName });
 
   return (
     <div className="messages">
       <h2>ЧАТ</h2>
-      <div className="history">
-        <Spin spinning={isLoading} tip="Ждите...">
-          {messages.map((message, index) => (
-            <div className="message" key={index.toString()}>
+      <Spin spinning={isLoading} tip="Ждите...">
+        <div className="chat-window">
+          {messages.map(({ user, date, id, text, likes }, index) => (
+            <div className={messageClass(user)} key={index.toString()}>
               <div className="head">
-                <div className="user">{message.user}</div>
-                <div className="date">{getDate(message.date)}</div>
+                <div className="user">{user}</div>
+                <div className="date">{getDate(date)}</div>
+                {user === userName && (
+                  <div className="edit-section">
+                    <Popconfirm
+                      title="Редактировать?"
+                      onConfirm={() => onEdit(id, text)}
+                      okText="Да"
+                      cancelText="Отмена"
+                      className
+                    >
+                      <EditOutlined />
+                    </Popconfirm>
+                    <Popconfirm
+                      title="Удалить?"
+                      onConfirm={() => onDelete(id)}
+                      okText="Да"
+                      cancelText="Отмена"
+                      className
+                    >
+                      <DeleteOutlined />
+                    </Popconfirm>
+                  </div>
+                )}
               </div>
-              <div className="text">{message.text}</div>
-              <div className="likes">Likes: {message.likes}</div>
+              {editedMessage === id ? (
+                <div>
+                  <Input.TextArea
+                    value={editedMessageText}
+                    autoSize
+                    onChange={({ target: { value } }) =>
+                      setEditedMessageText(value)
+                    }
+                  />
+                  <button
+                    type="button"
+                    onClick={onEditSave}
+                    className="edit-btn"
+                  >
+                    <CheckCircleOutlined />
+                  </button>
+                  <button type="button" onClick={onEditCancel}>
+                    <StopOutlined />
+                  </button>
+                </div>
+              ) : (
+                <div className="text">{text}</div>
+              )}
+              <div className="likes">
+                <HeartOutlined onClick={() => onLike(id, likes)} /> {likes}
+              </div>
             </div>
           ))}
           <div className="total-messages">
             Cообщений: <span>{totalResults}</span>
           </div>
-        </Spin>
-      </div>
-      <Form onFinish={onFinish} form={form} layout="vertical" className="form">
-        <Form.Item name="message" label="Введите сообщение">
-          <Input.TextArea />
-        </Form.Item>
-        <Form.Item>
-          <Button type="primary" htmlType="submit">
-            Отправить
-          </Button>
-        </Form.Item>
-      </Form>
+        </div>
+      </Spin>
+      <NewMessage />
     </div>
   );
 };

@@ -1,0 +1,10 @@
+.new-message {
+  display: flex;
+  justify-content: center;
+  column-gap: 16px;  
+}
+
+.new-message .text-area {
+  min-width: 400px;
+  min-height: 50px;
+}

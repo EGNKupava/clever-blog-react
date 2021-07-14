@@ -1,14 +1,16 @@
 import { createStore, applyMiddleware, combineReducers } from "redux";
 import createSagaMiddleware from "redux-saga";
 
-import { reducer } from "./reducer";
+import { reducer } from "./purchases/reducer";
 import { rootSaga } from "./root-saga";
 
 import { tableReducer } from "./table";
 import { messagesReducer } from "./messages";
+import { userReducer } from "./user";
 
 const rootReducer = combineReducers({
   table: tableReducer,
+  user: userReducer,
   main: reducer,
   messages: messagesReducer,
 });
