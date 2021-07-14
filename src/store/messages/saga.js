@@ -27,7 +27,7 @@ function* getMessagesWorker() {
 function* sendMessageWorker({ message }) {
   const body = {
     text: message,
-    user: "Cleverland",
+    user: "EGN",
   };
   try {
     const { data } = yield call(
