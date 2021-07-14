@@ -6,7 +6,7 @@ import styles from "./purchases.module.css";
 
 export const Purchases = () => {
   const dispatch = useDispatch();
-  const purchases = useSelector((state) => state.purchases);
+  const purchases = useSelector((state) => state.main.purchases);
 
   const onClearClick = () => {
     const clearPurchasesAction = clearPurchases();

@@ -9,7 +9,7 @@ import { messagesReducer } from "./messages";
 
 const rootReducer = combineReducers({
   table: tableReducer,
-  reducer,
+  main: reducer,
   messages: messagesReducer,
 });
 

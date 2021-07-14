@@ -1,20 +1,22 @@
-import React from 'react'
+import React from "react";
+
+import "./clock.css";
 
 export class Clock extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = ({
+    this.state = {
       date: new Date(),
-    });
+    };
   }
 
   updateTime() {
-    this.setState({date: new Date()});
+    this.setState({ date: new Date() });
   }
 
   componentDidMount() {
-    this.idTimer = setInterval(() => this.updateTime(), 1000)
+    this.idTimer = setInterval(() => this.updateTime(), 1000);
   }
 
   componentWillUnmount() {
@@ -23,10 +25,10 @@ export class Clock extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="clock">
         <span>Время:</span>
         {this.state.date.toLocaleTimeString()}
       </div>
-    )
+    );
   }
 }
