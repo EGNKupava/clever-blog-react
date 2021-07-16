@@ -9,6 +9,7 @@ import { Table } from "../table";
 import { ThemeContext, themes } from "../theme-context";
 import { Accordion } from "../accordion";
 import { Messages } from "../messages";
+import { UsersList } from "../users";
 
 import "antd/dist/antd.css";
 import "./app.css";
@@ -53,6 +54,9 @@ export const App = (props) => {
             </Route>
             <Route path="/messages">
               <Messages />
+            </Route>
+            <Route path="/users">
+              <UsersList />
             </Route>
             <Route path="*">
               <div> 404 PAGE NOT FOUND </div>
