@@ -35,6 +35,29 @@ export const usersReducer = (state = INITIAL_STATE, action) => {
         error,
       };
     }
+    case TYPES.ADD_USER_REQUEST: {
+      return {
+        ...state,
+        isLoading: true,
+        isError: false,
+      };
+    }
+
+    case TYPES.ADD_USER_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
+      };
+    }
+    case TYPES.ADD_USER_ERROR: {
+      const { error } = action;
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        error,
+      };
+    }
     default:
       return state;
   }

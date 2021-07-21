@@ -13,3 +13,18 @@ export const getUsersError = (error) => ({
   type: TYPES.GET_USERS_ERROR,
   error,
 });
+
+export const addUserRequest = (values) => ({
+  type: TYPES.ADD_USERS_REQUEST,
+  values,
+});
+
+export const addUserSuccess = (values) => ({
+  type: TYPES.ADD_USERS_SUCCESS,
+  values,
+});
+
+export const addUserError = (error) => ({
+  type: TYPES.ADD_USERS_ERROR,
+  error,
+});

@@ -10,4 +10,5 @@ export const api = {
   deleteMessage: ` ${BASE_URL}${CHAT}/incoming_webhook/deleteMessage`,
   updateMessage: ` ${BASE_URL}${CHAT}/incoming_webhook/updateMessage`,
   getUsers: ` ${BASE_URL}${USERS}/incoming_webhook/getUsers`,
+  addUser: ` ${BASE_URL}${USERS}/incoming_webhook/newUser`,
 };
