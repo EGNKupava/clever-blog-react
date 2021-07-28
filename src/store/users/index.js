@@ -6,6 +6,8 @@ const INITIAL_STATE = {
   isLoading: false,
   isError: false,
   error: "",
+  isAddUserError: false,
+  isAddUserLoading: false,
 };
 
 export const usersReducer = (state = INITIAL_STATE, action) => {
@@ -38,24 +40,22 @@ export const usersReducer = (state = INITIAL_STATE, action) => {
     case TYPES.ADD_USER_REQUEST: {
       return {
         ...state,
-        isLoading: true,
-        isError: false,
+        isAddUserError: false,
+        isAddUserLoading: true,
       };
     }
 
     case TYPES.ADD_USER_SUCCESS: {
       return {
         ...state,
-        isLoading: false,
+        isAddUserLoading: false,
       };
     }
     case TYPES.ADD_USER_ERROR: {
-      const { error } = action;
       return {
         ...state,
-        isLoading: false,
-        isError: true,
-        error,
+        isAddUserError: true,
+        isAddUserLoading: false,
       };
     }
     default:
