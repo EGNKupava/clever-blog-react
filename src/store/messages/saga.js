@@ -8,7 +8,6 @@ function* getMessagesWorker() {
       data: { messages, totalResults },
     } = yield call(axios.get, api.getMessages);
     yield delay(2000);
-    // throw new Error("ХЕРНЯ");
     yield put({
       type: TYPES.GET_MESSAGES_REQUEST_SUCCESS,
       messages,

@@ -1,4 +1,4 @@
-import { call, put, takeLatest, delay } from "redux-saga/effects";
+import { call, put, takeLatest, delay, fork } from "redux-saga/effects";
 import axios from "axios";
 import { TYPES } from "../action-types";
 import { api } from "../../constants/api";
@@ -7,7 +7,9 @@ import {
   getUsersError,
   addUserError,
   addUserSuccess,
+  getUsersRequest,
 } from "./action-creators";
+
 function* getUsersWorker() {
   try {
     const {
@@ -18,12 +20,15 @@ function* getUsersWorker() {
     yield put(getUsersError, error);
   }
 }
+
 function* addUserWorker({ values, onSuccess }) {
   try {
     const { data } = yield call(axios.post, api.addUser, values);
     console.log("data: ", data);
     onSuccess();
     yield put(addUserSuccess());
+    // yield put(getUsersRequest());
+    yield fork(getUsersWorker);
   } catch (error) {
     yield put(addUserError(error));
   }
