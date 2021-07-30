@@ -17,7 +17,7 @@ import "./app.css";
 export const App = (props) => {
   const [theme, setTheme] = useState(themes.light);
 
-  const isAuth = true;
+  const isAuth = false;
 
   if (!isAuth) {
     return <div>ЛОГИН</div>;
