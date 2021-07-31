@@ -18,3 +18,17 @@
     display: flex;
     column-gap: 16px;
 }
+
+.userImg {
+    width: 32px;
+    border-radius: 50%;
+    margin-right: 16px;
+}
+.userName {
+    color: #ffffff;
+    font-size: 16px;
+}
+
+.logOut {
+ padding: 16px;
+}

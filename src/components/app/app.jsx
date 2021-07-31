@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import { Header } from "../header";
 import { Main } from "../main";
@@ -13,19 +14,20 @@ import { UsersList } from "../users";
 
 import "antd/dist/antd.css";
 import "./app.css";
+import { Login } from "../login";
 
 export const App = (props) => {
   const [theme, setTheme] = useState(themes.light);
 
-  const isAuth = false;
-
-  if (!isAuth) {
-    return <div>ЛОГИН</div>;
-  }
+  const { isAuth } = useSelector((state) => state.user);
 
   const toggleTheme = () => {
     setTheme(theme === themes.dark ? themes.light : themes.dark);
   };
+
+  if (!isAuth) {
+    return <Login />;
+  }
 
   return (
     <ThemeContext.Provider value={{ toggleTheme, theme }}>
