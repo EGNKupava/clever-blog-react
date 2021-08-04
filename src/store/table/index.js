@@ -34,6 +34,9 @@ export const tableReducer = (state = INITIAL_STATE, action) => {
       };
     }
 
+    case "LOGOUT": {
+      return INITIAL_STATE;
+    }
     default:
       return state;
   }

@@ -1,5 +1,6 @@
-import { call, put, takeLatest, delay, fork } from "redux-saga/effects";
-import axios from "axios";
+import { call, put, takeLatest, fork } from "redux-saga/effects";
+
+import { cleverAxios } from "../../utils/axios";
 import { TYPES } from "../action-types";
 import { api } from "../../constants/api";
 import {
@@ -14,7 +15,7 @@ function* getUsersWorker() {
   try {
     const {
       data: { users, totalUsers },
-    } = yield call(axios.get, api.getUsers);
+    } = yield call(cleverAxios.get, api.getUsers);
     yield put(getUsersSuccess(users, totalUsers));
   } catch (error) {
     yield put(getUsersError, error);
@@ -23,7 +24,7 @@ function* getUsersWorker() {
 
 function* addUserWorker({ values, onSuccess }) {
   try {
-    const { data } = yield call(axios.post, api.addUser, values);
+    const { data } = yield call(cleverAxios.post, api.addUser, values);
     console.log("data: ", data);
     onSuccess();
     yield put(addUserSuccess());

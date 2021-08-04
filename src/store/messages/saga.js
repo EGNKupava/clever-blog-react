@@ -1,13 +1,13 @@
-import { call, put, takeLatest, delay, fork, select } from "redux-saga/effects";
-import axios from "axios";
+import { call, put, takeLatest, fork, select } from "redux-saga/effects";
 import { TYPES } from "../action-types";
 import { api } from "../../constants/api";
+import { cleverAxios } from "../../utils/axios";
+
 function* getMessagesWorker() {
   try {
     const {
       data: { messages, totalResults },
-    } = yield call(axios.get, api.getMessages);
-    yield delay(2000);
+    } = yield call(cleverAxios.get, api.getMessages);
     yield put({
       type: TYPES.GET_MESSAGES_REQUEST_SUCCESS,
       messages,
@@ -16,6 +16,7 @@ function* getMessagesWorker() {
   } catch (error) {
     yield put({
       type: TYPES.GET_MESSAGES_REQUEST_ERROR,
+      error,
     });
   }
 }
@@ -27,7 +28,7 @@ function* sendMessageWorker({ message }) {
     user: userName,
   };
   try {
-    const { data } = yield call(axios.post, api.newMessage, body);
+    yield call(cleverAxios.post, api.newMessage, body);
     yield fork(getMessagesWorker);
     // yield put({
     //   type: TYPES.GET_MESSAGES_REQUEST_SUCCESS,
@@ -43,7 +44,7 @@ function* sendMessageWorker({ message }) {
 
 function* deleteMessageWorker({ id }) {
   try {
-    const { data } = yield call(axios.delete, api.deleteMessage, {
+    const { data } = yield call(cleverAxios.delete, api.deleteMessage, {
       params: { id },
     });
     yield fork(getMessagesWorker);
@@ -61,7 +62,10 @@ function* deleteMessageWorker({ id }) {
 
 function* editMessageWorker({ id, text }) {
   try {
-    const { data } = yield call(axios.put, api.updateMessage, { id, text });
+    const { data } = yield call(cleverAxios.put, api.updateMessage, {
+      id,
+      text,
+    });
     yield fork(getMessagesWorker);
     // yield put({
     //   type: TYPES.GET_MESSAGES_REQUEST_SUCCESS,
@@ -76,7 +80,7 @@ function* editMessageWorker({ id, text }) {
 }
 function* updateMessageLikesWorker({ id, likes }) {
   try {
-    const { data } = yield call(axios.put, api.updateMessage, {
+    const { data } = yield call(cleverAxios.put, api.updateMessage, {
       id,
       likes,
     });

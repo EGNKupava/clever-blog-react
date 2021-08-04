@@ -1,16 +1,13 @@
 import { call, put, takeLatest, delay } from "redux-saga/effects";
-import axios from "axios";
 import { TYPES } from "../action-types";
+import { cleverAxios } from "../../utils/axios";
 
-function* getTableData(action) {
+function* getTableData() {
   try {
-    console.log(action);
     const { data } = yield call(
-      axios.get,
+      cleverAxios.get,
       "https://jsonplaceholder.typicode.com/posts"
     );
-    yield delay(5000);
-    // throw new Error("ХЕРНЯ");
     yield put({ type: TYPES.GET_TABLE_DATA_REQUEST_SUCCESS, data });
   } catch (error) {
     yield put({

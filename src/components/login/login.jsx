@@ -2,6 +2,8 @@ import React from "react";
 import GoogleLogin from "react-google-login";
 import { useDispatch } from "react-redux";
 
+import { setToken } from "../../utils/axios";
+
 import "./login.css";
 
 export const Login = () => {
@@ -11,6 +13,7 @@ export const Login = () => {
     console.log("res: ", res);
     const { profileObj, tokenId } = res;
     if (tokenId) {
+      setToken(tokenId);
       dispatch({
         type: "LOGIN_SUCCESS",
         profile: profileObj,
