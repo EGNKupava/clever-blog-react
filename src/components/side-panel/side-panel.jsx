@@ -37,6 +37,9 @@ export const SidePanel = () => {
       <NavLink className="link" to="/users">
         USERS
       </NavLink>
+      <NavLink className="link" to="/hooks">
+        Hooks
+      </NavLink>
       <div className="history">
         <button type="button" onClick={history.goBack}>
           {"<"}
