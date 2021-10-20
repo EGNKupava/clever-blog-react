@@ -12,13 +12,6 @@ const INITIAL_STATE = {
 
 export const reducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case TYPES.CHANGE_NAME: {
-      return {
-        ...state,
-        name: action.name,
-      };
-    }
-
     case TYPES.CLEAR_PURCHASES: {
       return {
         ...state,
